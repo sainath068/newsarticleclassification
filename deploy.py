@@ -71,8 +71,8 @@ def display_data(website):
     st.subheader(f"{website} Scraped Data")
     st.write(scraped_data)
 
-def save_summarized_data(text_analyzer, data, website):
-    # Save and display summarized data in the Streamlit app
+def summarize_data(text_analyzer, data, website):
+    # Summarize and display data in the Streamlit app
     summarized_data = pd.DataFrame()
     summarized_data['Title'] = data['Title']
     summarized_data['Date'] = data['Date']
@@ -81,8 +81,8 @@ def save_summarized_data(text_analyzer, data, website):
     st.subheader(f"{website} Summarized Data")
     st.write(summarized_data)
 
-def classify_and_save_data(text_analyzer, data, website):
-    # Classify, save, and display data in the Streamlit app
+def classify_and_display_data(text_analyzer, data, website):
+    # Classify, display, and summarize data in the Streamlit app
     classified_data = pd.DataFrame()
     classified_data['Title'] = data['Title']
     classified_data['Date'] = data['Date']
@@ -153,16 +153,16 @@ def main():
             text_analyzer = TextAnalyzer()
 
             if malaymail_selected:
-             
-                save_summarized_data(text_analyzer, malaymail_data, 'Malay Mail')
+                malaymail_data = pd.read_csv('malaymail.csv')
+                summarize_data(text_analyzer, malaymail_data, 'Malay Mail')
 
             if thestar_selected:
-                
-                save_summarized_data(text_analyzer, thestar_data, 'The Star')
+                thestar_data = pd.read_csv('thestar.csv')
+                summarize_data(text_analyzer, thestar_data, 'The Star')
 
             if bernama_selected:
-              
-                save_summarized_data(text_analyzer, bernama_data, 'Bernama')
+                bernama_data = pd.read_csv('bernama.csv')
+                summarize_data(text_analyzer, bernama_data, 'Bernama')
 
             st.text("Text Summarization finished!")
 
@@ -176,16 +176,16 @@ def main():
             text_analyzer = TextAnalyzer()
 
             if malaymail_selected:
-                
-                classify_and_save_data(text_analyzer, malaymail_data, 'Malay Mail')
+                malaymail_data = pd.read_csv('malaymail.csv')
+                classify_and_display_data(text_analyzer, malaymail_data, 'Malay Mail')
 
             if thestar_selected:
-               
-                classify_and_save_data(text_analyzer, thestar_data, 'The Star')
+                thestar_data = pd.read_csv('thestar.csv')
+                classify_and_display_data(text_analyzer, thestar_data, 'The Star')
 
             if bernama_selected:
-               
-                classify_and_save_data(text_analyzer, bernama_data, 'Bernama')
+                bernama_data = pd.read_csv('bernama.csv')
+                classify_and_display_data(text_analyzer, bernama_data, 'Bernama')
 
             st.text("Text Classification finished!")
 
