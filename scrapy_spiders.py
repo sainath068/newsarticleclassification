@@ -40,25 +40,6 @@ class MalayMailSpider(scrapy.Spider):
                 'Description': response.css('div.article-body p::text').getall()
             }
 
-            # Save the scraped data to CSV
-            self.save_to_csv('malaymail.csv', formatted_date_time, response.css('h1.article-title::text').get(), response.css('div.article-body p::text').getall())
-
-    def save_to_csv(self, file_name, date, title, description):
-        file_path = os.path.join('C:/Users/Windows/port', file_name)
-        header = ['Date', 'Title', 'Description']
-
-        # Check if the file already exists
-        file_exists = os.path.isfile(file_path)
-
-        with open(file_path, 'a', newline='', encoding='utf-8') as csvfile:
-            csv_writer = csv.writer(csvfile)
-
-            # Write header if the file is empty
-            if not file_exists:
-                csv_writer.writerow(header)
-
-            csv_writer.writerow([date, title, description])
-
 class TheStarSpider(scrapy.Spider):
     name = "thestar"
     allowed_domains = ["thestar.com.my"]
@@ -93,26 +74,6 @@ class TheStarSpider(scrapy.Spider):
                 'Title': response.css('div.headline h1::text').get(default='').strip(),
                 'Description': response.css('div.story p::text').getall()
             }
-
-            # Save the scraped data to CSV
-            self.save_to_csv('thestar.csv', formatted_date, response.css('div.headline h1::text').get(default='').strip(), response.css('div.story p::text').getall())
-
-    def save_to_csv(self, file_name, date, title, description):
-        file_path = os.path.join('C:/Users/Windows/port', file_name)
-        header = ['Date', 'Title', 'Description']
-
-        # Check if the file already exists
-        file_exists = os.path.isfile(file_path)
-
-        with open(file_path, 'a', newline='', encoding='utf-8') as csvfile:
-            csv_writer = csv.writer(csvfile)
-
-            # Write header if the file is empty
-            if not file_exists:
-                csv_writer.writerow(header)
-
-            csv_writer.writerow([date, title, description])
-
 
 class BernamaSpider(scrapy.Spider):
     name = "bernama"
@@ -162,24 +123,3 @@ class BernamaSpider(scrapy.Spider):
                     'Title': response.css('div h1.h2::text').get().strip(),
                     'Description': description
                 }
-
-                # Save the scraped data to CSV
-                self.save_to_csv('bernama.csv', formatted_date, response.css('div h1.h2::text').get().strip(), description)
-        else:
-            self.logger.warning("Invalid or missing date string.")
-
-    def save_to_csv(self, file_name, date, title, description):
-        file_path = os.path.join('C:/Users/Windows/port', file_name)
-        header = ['Date', 'Title', 'Description']
-
-        # Check if the file already exists
-        file_exists = os.path.isfile(file_path)
-
-        with open(file_path, 'a', newline='', encoding='utf-8') as csvfile:
-            csv_writer = csv.writer(csvfile)
-
-            # Write header if the file is empty
-            if not file_exists:
-                csv_writer.writerow(header)
-
-            csv_writer.writerow([date, title, description])
