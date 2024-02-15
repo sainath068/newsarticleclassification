@@ -153,15 +153,15 @@ def main():
             text_analyzer = TextAnalyzer()
 
             if malaymail_selected:
-                malaymail_data = pd.read_csv('malaymail.csv')
+             
                 save_summarized_data(text_analyzer, malaymail_data, 'Malay Mail')
 
             if thestar_selected:
-                thestar_data = pd.read_csv('thestar.csv')
+                
                 save_summarized_data(text_analyzer, thestar_data, 'The Star')
 
             if bernama_selected:
-                bernama_data = pd.read_csv('bernama.csv')
+              
                 save_summarized_data(text_analyzer, bernama_data, 'Bernama')
 
             st.text("Text Summarization finished!")
@@ -176,15 +176,15 @@ def main():
             text_analyzer = TextAnalyzer()
 
             if malaymail_selected:
-                malaymail_data = pd.read_csv('malaymail.csv')
+                
                 classify_and_save_data(text_analyzer, malaymail_data, 'Malay Mail')
 
             if thestar_selected:
-                thestar_data = pd.read_csv('thestar.csv')
+               
                 classify_and_save_data(text_analyzer, thestar_data, 'The Star')
 
             if bernama_selected:
-                bernama_data = pd.read_csv('bernama.csv')
+               
                 classify_and_save_data(text_analyzer, bernama_data, 'Bernama')
 
             st.text("Text Classification finished!")
