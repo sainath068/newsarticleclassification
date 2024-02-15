@@ -67,9 +67,12 @@ def run_spider(spider_class, website):
 
 def display_data(website):
     # Read and display scraped data in the Streamlit app
-    scraped_data = pd.read_csv(f'{website.lower().replace(" ", "_")}.csv')
-    st.subheader(f"{website} Scraped Data")
-    st.write(scraped_data)
+    try:
+        scraped_data = pd.read_csv(f'{website.lower().replace(" ", "_")}.csv')
+        st.subheader(f"{website} Scraped Data")
+        st.write(scraped_data)
+    except FileNotFoundError:
+        st.subheader(f"No data available for {website}")
 
 def summarize_data(text_analyzer, data, website):
     # Summarize and display data in the Streamlit app
